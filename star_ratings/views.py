@@ -24,7 +24,7 @@ class Rate(View):
 
     def post(self, request, *args, **kwargs):
         def _post(request, *args, **kwargs):
-            data = request.POST or json.loads(request.body.decode())
+            data = request.POST.copy() or json.loads(request.body.decode())
 
             return_url = data.pop('next', '/')
             if 'HTTP_X_REAL_IP' in self.request.META:
